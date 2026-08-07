@@ -12,7 +12,6 @@ body {
 header {
     background-color: #276270;
     color: white;
-    border-radius: 0 0 10px 10px;
     padding: 2em 1rem;
 }
 
@@ -31,10 +30,10 @@ header h1 {
 }
 
 .card {
-    background: white;
+    background: #ffffff;
     padding: 1.5rem;
     border-radius: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.46);
 }
 
 .card h2 {
@@ -49,18 +48,18 @@ header h1 {
 }
 
 .btn {
-    background-color: #2d6a4f;
+    background-color: #276270;
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #1b4332;
+    background-color: #2b15bc85;
 }
 
 /* Formulario */
@@ -98,7 +97,7 @@ input {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: rgb(220, 19, 19);
     padding: 2rem;
     border-radius: 8px;
     max-width: 500px;
@@ -124,4 +123,33 @@ input {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+/* --- NAVEGACIÓN EN EL HEADER --- */
+.navbar {
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: #2d6a4f;
+    transform: translateY(-2px);
+}
+
+/* Marca la página en la que te encuentras actualmente */
+.nav-link.active {
+    background-color: #2d6a4f;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
