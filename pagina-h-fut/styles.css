@@ -18,11 +18,9 @@ header {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* 3. Estilos de texto centrado */
     color: #ffffff;
     border-radius: 5px;
 }
-
 
 .containerp1 {
     color: #000000af;
@@ -33,6 +31,7 @@ header {
 .cardp1 {
     background: #ffffff;
     padding: 1.5rem;
+    line-height: 1.2;
 }
 
 .cardp1 h2 {
@@ -61,7 +60,7 @@ header h1 {
     margin: 2rem auto;
     padding: 0 1rem;
     display: grid;
-    gap: 1.5rem;
+    gap: 0.8rem;
 }
 
 .card {
@@ -82,6 +81,7 @@ header h1 {
     margin-bottom: 1rem;
 }
 
+
 .btn {
     background-color: #276270;
     color: white;
@@ -95,12 +95,23 @@ header h1 {
 
 .btn:hover {
     background-color: #4261c185;
-
 }
 
 /* Formulario */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card.form-card h2 {
+    margin-bottom: 0.5rem;
+}
+
+.card.form-card p {
+    margin-bottom: 0.5rem;
+}
+
+.card.form-card {
+    padding: 1.25rem;
 }
 
 input {
@@ -140,6 +151,7 @@ input {
     width: 90%;
     position: relative;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.25s ease-in-out;
 }
 
 .close {
@@ -159,10 +171,6 @@ input {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-content {
-    animation: fadeIn 0.25s ease-in-out;
 }
 
 /* --- NAVEGACIÓN EN EL HEADER --- */
@@ -201,4 +209,3 @@ input {
     text-align: center;
     padding: 1rem 0;
 }
-
