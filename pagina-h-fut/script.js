@@ -5,6 +5,27 @@ const emailInput = document.getElementById('email');
 
 const errorNombre = document.getElementById('error-nombre');
 const errorEmail = document.getElementById('error-email');
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalText = document.getElementById('modal-text');
+const closeModal = document.getElementById('close-modal');
+
+function openModal(title, text) {
+    modalTitle.textContent = title;
+    modalText.textContent = text;
+    modal.style.display = 'flex';
+}
+
+function closeModalWindow() {
+    modal.style.display = 'none';
+}
+
+closeModal.addEventListener('click', closeModalWindow);
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeModalWindow();
+    }
+});
 
 form.addEventListener('submit', (e) => {
     e.preventDefault(); // Previene el envío inmediato del formulario
@@ -35,7 +56,7 @@ form.addEventListener('submit', (e) => {
 
     // Si todo es válido
     if (isValid) {
-        alert(`¡Suscripción Exitosa!\nGracias ${nombreInput.value.trim()}, te has suscrito correctamente a nuestro boletín histórico.`);
+        openModal('¡Suscripción Exitosa!', `Gracias ${nombreInput.value.trim()}, te has suscrito correctamente a nuestro boletín histórico.`);
         form.reset();
     }
 });
