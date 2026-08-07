@@ -147,3 +147,10 @@ input {
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+.footer {
+    background-color: #276270;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
