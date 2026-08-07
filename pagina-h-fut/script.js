@@ -4,35 +4,12 @@ const modalTitle = document.getElementById('modal-title');
 const modalText = document.getElementById('modal-text');
 const closeModal = document.getElementById('close-modal');
 
-const btnOrigen = document.getElementById('btn-origen');
-const btnMundiales = document.getElementById('btn-mundiales');
-
-// Datos para la ventana modal
-const modalData = {
-    origen: {
-        title: "Orígenes del Fútbol",
-        text: "En la China de la dinastía Han (siglos II y III a.C.) se practicaba el 'Cuju', una actividad donde se pateaba una pelota de cuero hacia una red. Siglos más tarde, las reglas unificadas en las escuelas británicas dieron vida al deporte que conocemos hoy."
-    },
-    mundiales: {
-        title: "La Era de los Mundiales",
-        text: "Uruguay fue la sede del primer Mundial en 1930 y resultó campeón tras vencer a Argentina 4-2. Desde entonces, Brasil se ha consolidado como el máximo ganador del torneo con 5 copas del mundo."
-    }
-};
-
 // Función para abrir la ventana modal
 function openModal(title, text) {
     modalTitle.textContent = title;
     modalText.textContent = text;
     modal.style.display = 'flex';
 }
-
-btnOrigen.addEventListener('click', () => {
-    openModal(modalData.origen.title, modalData.origen.text);
-});
-
-btnMundiales.addEventListener('click', () => {
-    openModal(modalData.mundiales.title, modalData.mundiales.text);
-});
 
 // Cerrar modal al hacer clic en la "X" o fuera de la ventana
 closeModal.addEventListener('click', () => {
