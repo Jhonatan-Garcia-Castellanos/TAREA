@@ -1,28 +1,3 @@
-// --- MANEJO DE VENTANAS MODALES ---
-const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
-const modalText = document.getElementById('modal-text');
-const closeModal = document.getElementById('close-modal');
-
-// Función para abrir la ventana modal
-function openModal(title, text) {
-    modalTitle.textContent = title;
-    modalText.textContent = text;
-    modal.style.display = 'flex';
-}
-
-// Cerrar modal al hacer clic en la "X" o fuera de la ventana
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-
 // --- VALIDACIONES DE FORMULARIO EN JAVASCRIPT ---
 const form = document.getElementById('subscribe-form');
 const nombreInput = document.getElementById('nombre');
@@ -60,7 +35,7 @@ form.addEventListener('submit', (e) => {
 
     // Si todo es válido
     if (isValid) {
-        openModal("¡Suscripción Exitosa!", `Gracias ${nombreInput.value.trim()}, te has suscrito correctamente a nuestro boletín histórico.`);
+        alert(`¡Suscripción Exitosa!\nGracias ${nombreInput.value.trim()}, te has suscrito correctamente a nuestro boletín histórico.`);
         form.reset();
     }
 });
