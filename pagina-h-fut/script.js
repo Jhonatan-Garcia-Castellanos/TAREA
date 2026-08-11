@@ -1,4 +1,3 @@
-// --- VALIDACIONES DE FORMULARIO EN JAVASCRIPT ---
 const form = document.getElementById('subscribe-form');
 const nombreInput = document.getElementById('nombre');
 const emailInput = document.getElementById('email');
@@ -28,21 +27,20 @@ window.addEventListener('click', (event) => {
 });
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Previene el envío inmediato del formulario
+    e.preventDefault();
 
     let isValid = true;
 
-    // Limpiar mensajes anteriores
     errorNombre.textContent = '';
     errorEmail.textContent = '';
 
-    // VALIDACIÓN 1: Campo de Nombre (Que no esté vacío)
+    // VALIDACIÓN 1
     if (nombreInput.value.trim() === '') {
         errorNombre.textContent = 'Por favor, ingresa tu nombre.';
         isValid = false;
     }
 
-    // VALIDACIÓN 2: Campo de Correo (Que no esté vacío y cumpla el formato)
+    // VALIDACIÓN 2
     const emailValue = emailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -54,7 +52,6 @@ form.addEventListener('submit', (e) => {
         isValid = false;
     }
 
-    // Si todo es válido
     if (isValid) {
         openModal('¡Suscripción Exitosa!', `Gracias ${nombreInput.value.trim()}, te has suscrito correctamente a nuestro boletín histórico.`);
         form.reset();

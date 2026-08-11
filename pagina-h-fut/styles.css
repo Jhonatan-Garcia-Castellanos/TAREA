@@ -13,7 +13,6 @@ header {
     background-color: #276270;
     color: white;
     padding: 2em 2rem;
-    /* 1. Imagen de fondo colocada detrás del texto */
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/fut.png');
     background-size: cover;
     background-position: center;
