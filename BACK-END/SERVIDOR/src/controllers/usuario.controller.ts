@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import connection from '../db/connection.js'
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export const addUsuario = async (req: Request, res: Response) => {
 
@@ -8,7 +9,7 @@ export const addUsuario = async (req: Request, res: Response) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    connection.query('INSERT INTO usuarios SET ?', { nombre: nombre, password: hashedPassword } , (err, data) =>{
+    connection.query('INSERT INTO usuarios SET ?', { nombre: nombre , password: hashedPassword } , (err, data) =>{
         if(err) {
             console.log(err)
 
@@ -26,7 +27,7 @@ export const addUsuario = async (req: Request, res: Response) => {
 
 export const loginUser = (req: Request, res: Response) => {
    
-    const { nombre, password } = req.body
+    const { nombre, password } = req.body;
 
     connection.query('SELECT * FROM usuarios WHERE nombre = ' + connection.escape(nombre), (err, data) => {
         if(err) {
@@ -34,20 +35,37 @@ export const loginUser = (req: Request, res: Response) => {
         } else {
             if(data.length == 0) {
             res.json({
-                msg: 'Login',
+                msg: 'No existe el usuario en la base de datos',
 
             })
             } else {
+                const userPassword = data[0].password;
+                console.log(password)
+                // Comparamos el password 
+                bcrypt.compare(password, userPassword).then((result) => {
+                    if(result) {
+                        // Login exitoso -- Generamos el token
+
+                        const token = jwt.sign({
+                            nombre: nombre,
+                        }, process.env.SECRET_KEY || 'pepito123', {
+                            expiresIn: '10000'
+                        })
+
+                        res.json({
+                            token
+                        })
+                    } else {
+                        // Password Incorrecto
+                        res.json({
+                            msg: 'Password incorrecto',
+                        })
+                    }
+                })
 
             }
-            console.log(data)
+
         }
-    })
-
-
-    res.json({
-        msg: 'Login',
-        body: req.body
     })
 
 }

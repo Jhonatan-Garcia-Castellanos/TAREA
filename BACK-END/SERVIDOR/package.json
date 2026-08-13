@@ -25,11 +25,13 @@
     "jsonwebtoken": "^9.0.3",
     "mysql": "^2.18.1",
     "nodemon": "^3.1.14",
+    "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mysql": "^2.15.27",
     "save": "^2.9.0"
   }

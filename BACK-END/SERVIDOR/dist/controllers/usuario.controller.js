@@ -1,5 +1,6 @@
 import connection from '../db/connection.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 export const addUsuario = async (req, res) => {
     const { nombre, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -23,17 +24,34 @@ export const loginUser = (req, res) => {
         else {
             if (data.length == 0) {
                 res.json({
-                    msg: 'Login',
+                    msg: 'No existe el usuario en la base de datos',
                 });
             }
             else {
+                const userPassword = data[0].password;
+                console.log(password);
+                // Comparamos el password 
+                bcrypt.compare(password, userPassword).then((result) => {
+                    if (result) {
+                        // Login exitoso -- Generamos el token
+                        const token = jwt.sign({
+                            nombre: nombre,
+                        }, process.env.SECRET_KEY || 'pepito123', {
+                            expiresIn: '10000'
+                        });
+                        res.json({
+                            token
+                        });
+                    }
+                    else {
+                        // Password Incorrecto
+                        res.json({
+                            msg: 'Password incorrecto',
+                        });
+                    }
+                });
             }
-            console.log(data);
         }
-    });
-    res.json({
-        msg: 'Login',
-        body: req.body
     });
 };
 //# sourceMappingURL=usuario.controller.js.map

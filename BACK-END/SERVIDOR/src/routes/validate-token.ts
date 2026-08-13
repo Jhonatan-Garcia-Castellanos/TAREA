@@ -1,0 +1,33 @@
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+const validateToken = (req: Request, res: Response, next: NextFunction) => {
+    const headerToken = req.headers['authorization'];
+    console.log(headerToken);
+    
+    if(headerToken != undefined && headerToken.startsWith('Bearer ')) {
+        // Tiene Token
+        const bearerToken = headerToken.slice(7);
+
+        try {
+            const tokenValido = jwt.verify(bearerToken, process.env.SECRET_KEY || 'pepito123')
+            console.log(tokenValido)
+            next();
+
+        } catch (error) {
+            res.status(400).json({
+                error: "Token no valido"
+        })
+        }
+        
+
+    } else {
+        // No tiene Token
+        res.status(400).json({
+            error: 'Acceso denegado'
+        })
+    }
+
+}
+
+export default validateToken
