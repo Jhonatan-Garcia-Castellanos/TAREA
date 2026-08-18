@@ -2,22 +2,78 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registrar Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <!-- Misma ruta de estilos que en el login -->
+    <link rel="stylesheet" href="/TAREA/BACKPHP/public/styles.css">
 </head>
 <body>
-    <h1>Registrar Nuevo Usuario</h1>
-    <form action="../index.php" method="POST">
-        <input type="hidden" name="action" value="register">
-        <label for="username">Usuario:</label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <label for="password">Contraseña:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <button type="submit">Registrar</button>
-    </form>
 
-    <hr>
-    <a href="../index.php">Volver al Login</a>
+    <div class="main-screen">
+        <!-- Esfera flotante exterior en la esquina inferior derecha -->
+        <div class="outer-circle"></div>
+
+        <div class="login-wrapper">
+            <!-- Panel Izquierdo Azul con Esferas -->
+            <div class="brand-panel">
+                <div class="circle circle-top"></div>
+                <div class="circle circle-bottom-left"></div>
+                <div class="circle circle-bottom-right"></div>
+                
+                <div class="brand-content">
+                    <h1>ÚNETE A</h1>
+                    <h2>ÁCIDO COLOMBIA</h2>
+                    <p>Crea tu cuenta para comenzar a gestionar tus proyectos y acceder a todas las funciones de la plataforma.</p>
+                </div>
+            </div>
+
+            <!-- Panel Derecho: Formulario de Registro -->
+            <div class="form-panel">
+                <h3>Crear Cuenta</h3>
+                <p class="subtitle">Ingresa tus datos para registrarte</p>
+
+                <?php if (isset($error)): ?>
+                    <div class="error-msg"><?php echo $error; ?></div>
+                <?php endif; ?>
+
+                <form action="/TAREA/BACKPHP/index.php" method="POST">
+                    <input type="hidden" name="action" value="register">
+
+                    <div class="input-group">
+                        <input type="text" name="username" placeholder="Nombre de usuario" required>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" name="password" id="passInput" placeholder="Contraseña" required>
+                        <span class="show-btn" onclick="togglePass()">VER</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Registrarse</button>
+                </form>
+
+                <div class="divider">
+                    <span>O</span>
+                </div>
+
+                <p class="signup-text">
+                    ¿Ya tienes una cuenta? <a href="/TAREA/BACKPHP/index.php">Inicia Sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePass() {
+            const pass = document.getElementById('passInput');
+            const btn = document.querySelector('.show-btn');
+            if (pass.type === 'password') {
+                pass.type = 'text';
+                btn.textContent = 'OCULTAR';
+            } else {
+                pass.type = 'password';
+                btn.textContent = 'VER';
+            }
+        }
+    </script>
 </body>
 </html>
