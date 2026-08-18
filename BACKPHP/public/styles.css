@@ -32,6 +32,7 @@ body {
     height: 260px;
     background: linear-gradient(135deg, #1C3B4A, #004BA0);
     border-radius: 50%;
+    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.85);
     bottom: -60px;
     right: -60px;
     z-index: 1;
@@ -47,7 +48,7 @@ body {
     display: flex;
     position: relative;
     z-index: 2;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(28, 59, 74, 0.75);
     border: 0px solid #f0f0f0;
 }
 
@@ -99,7 +100,7 @@ body {
     position: absolute;
     border-radius: 50%;
     background: linear-gradient(135deg, #1C3B4A, #004BA0);
-    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.35);
 }
 
 .circle-top {
