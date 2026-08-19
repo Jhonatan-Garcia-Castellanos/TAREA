@@ -18,8 +18,8 @@
         <!-- SIDEBAR (Barra Lateral Azul) -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-            <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">                
-            <span>ACIDO</span>
+                <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">                
+                <span>ACIDO</span>
             </div>
 
             <hr class="sidebar-divider">
@@ -47,10 +47,28 @@
 
             <div class="sidebar-heading">COMPLEMENTOS</div>
 
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-folder"></i>
-                <span>Páginas</span>
-            </a>
+            <!-- OPCCIÓN DESPLEGABLE: PÁGINAS -->
+            <div class="sidebar-dropdown">
+                <button type="button" class="nav-item dropdown-toggle" onclick="toggleSubmenu(this)">
+                    <div class="nav-label">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Páginas</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right arrow-icon"></i>
+                </button>
+
+                <div class="sidebar-submenu">
+                    <a href="/TAREA/BACKPHP/index.php?action=login">
+                        <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+                    </a>
+                    <a href="/TAREA/BACKPHP/view/register.php">
+                        <i class="fa-solid fa-user-plus"></i> Registro
+                    </a>
+                    <a href="/TAREA/BACKPHP/index.php?action=dashboard&page=usuarios">
+                        <i class="fa-solid fa-users"></i> Usuarios
+                    </a>
+                </div>
+            </div>
 
             <a href="#" class="nav-item">
                 <i class="fa-solid fa-chart-area"></i>
@@ -182,8 +200,14 @@
 
     </div>
 
-    <!-- SCRIPT PARA RENDERIZAR LAS GRÁFICAS -->
+    <!-- SCRIPT PARA RENDERIZAR GRÁFICAS Y MANEJAR EL MENÚ DESPLEGABLE -->
     <script>
+        // Función para abrir/cerrar el submenú de Páginas
+        function toggleSubmenu(button) {
+            const dropdown = button.parentElement;
+            dropdown.classList.toggle('open');
+        }
+
         // 1. Gráfica de Líneas (Ganancias)
         const ctxArea = document.getElementById('areaChart').getContext('2d');
         new Chart(ctxArea, {
