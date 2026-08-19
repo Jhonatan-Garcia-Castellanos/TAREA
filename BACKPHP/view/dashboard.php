@@ -90,7 +90,7 @@
                     <div class="divider-vertical"></div>
                     <div class="user-info">
                         <span>Usuario Demo</span>
-                        <div class="avatar">👤</div>
+                        <div class="avatar"></div>
                     </div>
                 </div>
             </header>
@@ -100,7 +100,7 @@
                 
                 <!-- TITULO Y BOTÓN GENERAR -->
                 <div class="page-header">
-                    <h2>Dashboard</h2>
+                    <h2>DASHBOARD</h2>
                     <button class="btn-report"><i class="fa-solid fa-download"></i> Generar Reporte</button>
                 </div>
 

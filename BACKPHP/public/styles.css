@@ -28,7 +28,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    background: linear-gradient(135deg, #A6A6A6, #004BA0, #1C3B4A, #D48A3A, #A6A6A6 );
+    background: linear-gradient(135deg, #A6A6A6, #004BA0, #1C3B4A, #A6A6A6 );
 }
 
 /* Esfera azul exterior en la esquina inferior derecha */
@@ -301,7 +301,7 @@ body {
    ESTILOS PARA EL DASHBOARD (SB ADMIN STYLE)
 =================================================== */
 .dashboard-body {
-    background: linear-gradient(180deg, #ffffff 60%,  #004ba074, #1c3b4aa6 );
+    background: linear-gradient(180deg, #ffffff 80%, #a6a6a6 100%);
     margin: 0;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
@@ -399,8 +399,7 @@ body {
 /* Topbar Superior */
 .topbar {
     height: 70px;
-    background: #ffffff;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    background: linear-gradient(180deg, rgba(29, 59, 74, 0.89), rgba(0, 75, 160, 1));
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -439,7 +438,7 @@ body {
 
 .icon-badge {
     position: relative;
-    color: #d1d3e2;
+    color: #feffff;
     font-size: 16px;
     cursor: pointer;
 }
@@ -469,7 +468,7 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 13px;
-    color: #858796;
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -493,6 +492,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
+    font-weight: bold;
 }
 
 .page-header h2 {
@@ -522,9 +522,9 @@ body {
 
 .metric-card {
     background: #ffffff;
-    border-radius: 5px;
+    border-radius: 25px;
     padding: 20px;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.25);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -599,7 +599,7 @@ body {
 .chart-card {
     background: #ffffff;
     border-radius: 25px;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.5);
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.25);
     overflow: hidden;
 }
 
