@@ -22,7 +22,7 @@
                 
                 <div class="brand-content">
                     <h1>ÚNETE A</h1>
-                    <h2>ÁCIDO COLOMBIA</h2>
+                    <h2>ACIDO COLOMBIA</h2>
                     <p>Crea tu cuenta para comenzar a gestionar tus proyectos y acceder a todas las funciones de la plataforma.</p>
                 </div>
             </div>

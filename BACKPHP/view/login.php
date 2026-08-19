@@ -21,7 +21,7 @@
                 
                 <div class="brand-content">
                     <h1>BIENVENIDO</h1>
-                    <h2>ÁCIDO COLOMBIA</h2>
+                    <h2>ACIDO COLOMBIA</h2>
                     <p>Ingresa a tu cuenta para gestionar tus módulos y consultar la información de tu plataforma.</p>
                 </div>
             </div>
