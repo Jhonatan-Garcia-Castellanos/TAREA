@@ -4,6 +4,9 @@ require_once "controller/UsuarioController.php";
 session_start();
 $controller = new UsuarioController();
 
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
 
     // Cambiado de "registrar" a "register" para coincidir con el HTML
