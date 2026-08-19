@@ -303,6 +303,7 @@ body {
 .dashboard-container {
     display: flex;
     min-height: 100vh;
+    border-radius: 25px;
 }
 
 /* Sidebar Azul */
@@ -591,9 +592,10 @@ body {
 
 .chart-card {
     background: #ffffff;
-    border-radius: 5px;
+    border-radius: 25px;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
     overflow: hidden;
+
 }
 
 .chart-header {
