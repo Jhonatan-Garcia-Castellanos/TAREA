@@ -302,7 +302,7 @@ body {
    ESTILOS PARA EL DASHBOARD (SB ADMIN STYLE)
 =================================================== */
 .dashboard-body {
-    background-color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 60%,  #004ba074, #1c3b4aa6 );
     margin: 0;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
@@ -310,13 +310,14 @@ body {
 .dashboard-container {
     display: flex;
     min-height: 100vh;
+    border-radius: 25px;
 }
 
 /* Sidebar Azul */
 .sidebar {
     width: 270px;
     background-color: #61bb21;
-    background-image: linear-gradient(180deg, #1C3B4A 50%, #224abe 100%);
+    background-image: linear-gradient(180deg, #1C3B4A 15%, #004BA0 90%, #808080);
     color: #ffffff;
     padding: 0 15px;
     display: flex;
@@ -598,8 +599,8 @@ body {
 
 .chart-card {
     background: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    border-radius: 25px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.5);
     overflow: hidden;
 }
 
