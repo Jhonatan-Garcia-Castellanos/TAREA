@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Cuenta</title>
-    <!-- Misma ruta de estilos que en el login -->
+    <title>Crear Cuenta - Ácido Colombia</title>
+
+    <!-- Importación directa de la fuente Cinzel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Íconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Hoja de estilos principal -->
     <link rel="stylesheet" href="/TAREA/BACKPHP/public/styles.css">
 </head>
 <body>
@@ -22,7 +31,7 @@
                 
                 <div class="brand-content">
                     <h1>ÚNETE A</h1>
-                    <h2>ACIDO COLOMBIA</h2>
+                    <h2>ÁCIDO COLOMBIA</h2>
                     <p>Crea tu cuenta para comenzar a gestionar tus proyectos y acceder a todas las funciones de la plataforma.</p>
                 </div>
             </div>
@@ -56,7 +65,7 @@
                 </div>
 
                 <p class="signup-text">
-                    ¿Ya tienes una cuenta? <a href="/TAREA/BACKPHP/index.php">Inicia Sesión</a>
+                    ¿Ya tienes una cuenta? <a href="/TAREA/BACKPHP/index.php?action=login">Inicia Sesión</a>
                 </p>
             </div>
         </div>
