@@ -12,8 +12,9 @@
 body {
     background-color: #D48A3A !important;
     min-height: 100vh;
-    display: flex;
+    width: 100%;
     justify-content: center;
+    display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
@@ -314,7 +315,7 @@ body {
 
 /* Sidebar Azul */
 .sidebar {
-    width: 270px;
+    width: 300px;
     background-color: #61bb21;
     background-image: linear-gradient(180deg, #1C3B4A 15%, #004BA0 90%, #808080);
     color: #ffffff;
