@@ -693,3 +693,9 @@ body {
 .sidebar-dropdown.open .arrow-icon {
     transform: rotate(90deg);
 }
+
+.logoaci {
+    width: 150px;
+    height: 50px;
+    object-fit: contain;
+}

@@ -21,14 +21,15 @@
                 <div class="circle circle-bottom-right"></div>
                 
                 <div class="brand-content">
-                    <h1>BIENVENIDO</h1>
-                    <h2>ACIDO COLOMBIA</h2>
+                    <h1>BIENVENIDOS</h1>
+
                     <p>Ingresa a tu cuenta para gestionar tus módulos y consultar la información de tu plataforma.</p>
                 </div>
             </div>
 
             <!-- Panel Derecho: Formulario -->
             <div class="form-panel">
+                <img src="/TAREA/BACKPHP/public/iconooo.png" alt="icon" class="logoaci">
                 <h3>Iniciar Sesión</h3>
                 <p class="subtitle">Ingresa tus credenciales para continuar</p>
 
