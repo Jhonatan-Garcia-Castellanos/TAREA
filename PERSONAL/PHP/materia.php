@@ -1,20 +1,23 @@
 <?php
 
 class Materia {
-
-    public function setEstudainte($estudiante) {
-        $this->estudiante = $estudiante;
-    }
-    public function getEstudainte() {
-        return $this->estudiante;
-    }
     // 1. Atributos / Propiedades
     public $id;
     public $codigo;
     public $nombreMateria;          
-    public $descripcion;           
+    public $descripcion; 
+    public $estudiante; // Objeto Estudiante
 
-    // 2. Constructor (para inicializar la materia fácilmente)
+    // 2. Setters y Getters para el Estudiante
+    public function setEstudiante($estudiante) {
+        $this->estudiante = $estudiante;
+    }
+
+    public function getEstudiante() {
+        return $this->estudiante;
+    }
+
+    // 3. Método para asignar toda la información de la materia
     public function setInfo($id, $codigo, $nombre, $descripcion) {
         $this->id = $id;
         $this->codigo = $codigo;
@@ -22,9 +25,9 @@ class Materia {
         $this->descripcion = $descripcion;
     }
 
-    // 3. Métodos o Getters/Setters (Ejemplo)
+    // 4. Método para obtener el resumen en texto
     public function getInfo() {
-    return "{$this->nombreMateria} - {$this->descripcion} ({$this->codigo} Codigo)";
+        return "{$this->nombreMateria} - {$this->descripcion} (Código {$this->codigo})";
     }
 }
 
