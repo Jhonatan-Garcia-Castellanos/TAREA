@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,14 @@
     $jhonatan = new Estudiante();
     $jhonatan->setNombre("Jhonatan");
     echo $jhonatan->getNombre();
+
+    echo "<br>";
+
+    include("materia.php");
+    $materiaa = new Materia(1,"MAT-101", "Matematicas", "Materia de calculo y algebra");
+    $materiaa->getInfo();
+    echo $materiaa->getInfo();
+
     // echo "<br>";
     // echo "<br>";
     // for ($i = 1; $i <= 5; $i++) {
