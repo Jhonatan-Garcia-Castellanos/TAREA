@@ -23,7 +23,7 @@
     include "controller/eliminar_persona.php";
     ?>
     <div class="container-fluid row">
-        <form class="col-4 p-3" method="POST">
+        <form class="col-4" p-3 method="POST">
             <h3 class="text-center text-secondary">Registro de personas</h3>
             <?php
             include "controller/resgistro_persona.php";
