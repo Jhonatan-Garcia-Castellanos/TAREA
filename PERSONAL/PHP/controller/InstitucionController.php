@@ -3,6 +3,7 @@
 class InstitucionController {
 
     private $modelo;
+    private $estudiante;
 
     public function __construct() {
         // 1. Requerir los archivos antes de usar las clases
@@ -40,6 +41,10 @@ class InstitucionController {
         echo "<b>Profesor:</b> " . $insti->getProfesor()->getNombreProfesor() . "<br>";
         echo "<b>Materia:</b> " . $insti->getProfesor()->getMateria()->getInfo() . "<br>";
         echo "<b>Estudiante:</b> " . $insti->getProfesor()->getMateria()->getEstudiante()->getNombre() . "<br>";
+    }
+    public function crearEstudiante() {
+        $this->estudiante = new Estudiante();
+        return $this->estudiante;
     }
 }
 ?>
