@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crud PHP y MtSQL</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0939c1b351.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,14 +18,14 @@
         }
     </script>
     <h1 class="text-center p-3">Modulo de Registro de usuarios</h1>
-    <?php 
+    <?php
     include "models/conexion.php";
     include "controller/eliminar_persona.php";
     ?>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="POST">
             <h3 class="text-center text-secondary">Registro de personas</h3>
-            <?php 
+            <?php
             include "controller/resgistro_persona.php";
             ?>
             <div class="mb-3">
@@ -77,8 +76,10 @@
                             <td><?= $datos->fecha_nac ?></td>
                             <td><?= $datos->correo ?></td>
                             <td>
-                                <a href="modificar_persona.php?id=<?= $datos->id ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a onclick="return eliminar()" href="index.php?id=<?= $datos->id ?>" class="btn btn-small btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="modificar_persona.php?id=<?= $datos->id ?>" class="btn btn-small btn-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a onclick="return eliminar()" href="index.php?id=<?= $datos->id ?>"
+                                    class="btn btn-small btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                             </td>
                         </tr>
                     <?php }
