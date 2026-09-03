@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +12,15 @@
     <!-- Chart.js para las gráficas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body class="dashboard-body">
 
     <div class="dashboard-container">
-        
+
         <!-- SIDEBAR (Barra Lateral Azul) -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">                
+                <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">
                 <span>ACIDO</span>
             </div>
 
@@ -35,7 +37,7 @@
 
             <a href="#" class="nav-item">
                 <i class="fa-solid fa-gear"></i>
-                <span>Componentes</span>
+                <span>CRUD</span>
             </a>
 
             <a href="#" class="nav-item">
@@ -64,7 +66,7 @@
                     <a href="/TAREA/BACKPHP/view/register.php">
                         <i class="fa-solid fa-user-plus"></i> Registro
                     </a>
-                    <a href="/TAREA/BACKPHP/index.php?action=dashboard&page=usuarios">
+                    <a href="/TAREA/BACKPHP/index.php?action=crud">
                         <i class="fa-solid fa-users"></i> Usuarios
                     </a>
                 </div>
@@ -88,7 +90,7 @@
 
         <!-- CONTENIDO PRINCIPAL -->
         <main class="main-content">
-            
+
             <!-- NAVBAR SUPERIOR -->
             <header class="topbar">
                 <div class="search-bar">
@@ -115,7 +117,7 @@
 
             <!-- CONTENIDO INTERNO -->
             <div class="content-padding">
-                
+
                 <!-- TITULO Y BOTÓN GENERAR -->
                 <div class="page-header">
                     <h2>DASHBOARD</h2>
@@ -124,7 +126,7 @@
 
                 <!-- METRICAS / TARJETAS SUPERIORES -->
                 <div class="cards-grid">
-                    
+
                     <!-- Tarjeta Azul -->
                     <div class="metric-card border-blue">
                         <div class="metric-info">
@@ -170,7 +172,7 @@
 
                 <!-- SECCIÓN DE GRÁFICAS -->
                 <div class="charts-grid">
-                    
+
                     <!-- Gráfica de Líneas -->
                     <div class="chart-card">
                         <div class="chart-header">
@@ -254,4 +256,5 @@
         });
     </script>
 </body>
+
 </html>
