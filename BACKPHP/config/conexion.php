@@ -2,19 +2,21 @@
 // config/conexion.php
 class Conexion {
     private $host = "localhost";
-    private $dbname = "login_db";
+    private $dbname = "projecto_acido";
     private $user = "root";
     private $password = "";
     public $conn;
 
     public function __construct() {
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->user, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDo::ERRMODE_EXCEPTION);
+            // Se añade charset=utf8mb4 para el correcto manejo de texto
+            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8mb4", $this->user, $this->password);
+            
+            // Corrección: PDO en mayúsculas (PDO::ERRMODE_EXCEPTION)
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die("Error en la conexion: " . $e->getMessage());
+            die("Error en la conexión: " . $e->getMessage());
         }
-
     }
 }
 ?>
