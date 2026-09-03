@@ -35,7 +35,7 @@
 
             <div class="sidebar-heading">INTERFACE</div>
 
-            <a href="/TAREA/BACKPHP/index.php?action=crud" class="nav-item">
+            <a href="#" class="nav-item">
                 <i class="fa-solid fa-gear"></i>
                 <span>CRUD</span>
             </a>
