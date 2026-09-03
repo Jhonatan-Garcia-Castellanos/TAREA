@@ -23,15 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["crud_action"]) && $_P
 
     if (!empty($id)) {
         if (!empty($pass_input)) {
+            $passwordHash = password_hash($pass_input, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("UPDATE usuarios SET username = ?, password = ? WHERE id = ?");
-            $stmt->execute([$user_input, $pass_input, $id]);
+            $stmt->execute([$user_input, $passwordHash, $id]);
         } else {
             $stmt = $pdo->prepare("UPDATE usuarios SET username = ? WHERE id = ?");
             $stmt->execute([$user_input, $id]);
         }
     } else {
+        $passwordHash = password_hash($pass_input, PASSWORD_DEFAULT);
         $stmt = $pdo->prepare("INSERT INTO usuarios (username, password) VALUES (?, ?)");
-        $stmt->execute([$user_input, $pass_input]);
+        $stmt->execute([$user_input, $passwordHash]);
     }
     header("Location: index.php?action=crud");
     exit();
