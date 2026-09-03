@@ -5,7 +5,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 $host = 'localhost';
-$dbname = 'login_db';
+$dbname = 'plojecto';
 $username = 'root';
 $password = '';
 

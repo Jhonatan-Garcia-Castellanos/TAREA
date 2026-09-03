@@ -31,7 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
             header("Location: index.php");
             exit();
         } else {
-            echo "Usuario o contraseña incorrectos.";
+            // REDIRECCIÓN CORRECTA: Corta la ejecución y evita que se cargue la vista inferior
+            header("Location: index.php?action=login&error=invalid_credentials");
+            exit();
         }
     }
 }
@@ -42,7 +44,7 @@ if (isset($_GET["action"])) {
     // Si la acción es logout, destruye la sesión
     if ($_GET["action"] === "logout") {
         session_destroy();
-        header("Location: index.php");
+        header("Location: index.php?action=login");
         exit();
     }
 
@@ -52,11 +54,11 @@ if (isset($_GET["action"])) {
         exit(); 
     }
 
-    // Si la acción es abrir el CRUD de registros (¡Colocado aquí arriba para que corte el flujo correctamente!)
+    // Si la acción es abrir el CRUD de registros
     if ($_GET["action"] === "crud") {
         if (isset($_SESSION["user"])) {
             require_once "view/crud.php"; 
-            exit(); // Detiene la ejecución aquí para que NO cargue el dashboard por debajo
+            exit();
         } else {
             header("Location: index.php?action=login");
             exit();
@@ -64,9 +66,9 @@ if (isset($_GET["action"])) {
     }
 }
 
-// 3. CARGAR VISTA POR DEFECTO SEGÚN LA SESIÓN (Si no hay ninguna acción GET específica)
+// 3. CARGAR VISTA POR DEFECTO SEGÚN LA SESIÓN
 if (isset($_SESSION["user"])) {
-    require_once "view/dashboard.php";
+    require_once "view/dashboard.php"; 
 } else {
     require_once "view/login.php";
 }
