@@ -63,7 +63,7 @@
                     <a href="/TAREA/BACKPHP/index.php?action=login">
                         <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
                     </a>
-                    <a href="/TAREA/BACKPHP/view/register.php">
+                    <a href="/TAREA/BACKPHP/index.php?action=register">
                         <i class="fa-solid fa-user-plus"></i> Registro
                     </a>
                     <a href="/TAREA/BACKPHP/index.php?action=crud">

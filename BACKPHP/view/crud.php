@@ -16,36 +16,49 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 
+// 1. PROCESAR GUARDAR / ACTUALIZAR
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["crud_action"]) && $_POST["crud_action"] === "save") {
-    $id = $_POST['id'] ?? '';
-    $user_input = $_POST['username'] ?? '';
+    $original_email = $_POST['original_email'] ?? '';
+    $email_input = trim($_POST['email'] ?? '');
     $pass_input = $_POST['password'] ?? '';
 
-    if (!empty($id)) {
+    // Extraer el nombre automáticamente para mantener consistencia con el registro
+    $partes = explode('@', $email_input);
+    $nombreAutomatico = ucfirst($partes[0]);
+
+    if (!empty($original_email)) {
+        // ACTUALIZAR USUARIO EXISTENTE
         if (!empty($pass_input)) {
-            $stmt = $pdo->prepare("UPDATE usuarios SET username = ?, password = ? WHERE id = ?");
-            $stmt->execute([$user_input, $pass_input, $id]);
+            $hash = password_hash($pass_input, PASSWORD_BCRYPT);
+            $stmt = $pdo->prepare("UPDATE usuario SET email = ?, nombre = ?, password = ? WHERE email = ?");
+            $stmt->execute([$email_input, $nombreAutomatico, $hash, $original_email]);
         } else {
-            $stmt = $pdo->prepare("UPDATE usuarios SET username = ? WHERE id = ?");
-            $stmt->execute([$user_input, $id]);
+            $stmt = $pdo->prepare("UPDATE usuario SET email = ?, nombre = ? WHERE email = ?");
+            $stmt->execute([$email_input, $nombreAutomatico, $original_email]);
         }
     } else {
-        $stmt = $pdo->prepare("INSERT INTO usuarios (username, password) VALUES (?, ?)");
-        $stmt->execute([$user_input, $pass_input]);
+        // INSERTAR NUEVO USUARIO
+        if (!empty($email_input) && !empty($pass_input)) {
+            $hash = password_hash($pass_input, PASSWORD_BCRYPT);
+            $stmt = $pdo->prepare("INSERT INTO usuario (email, nombre, password) VALUES (?, ?, ?)");
+            $stmt->execute([$email_input, $nombreAutomatico, $hash]);
+        }
     }
     header("Location: index.php?action=crud");
     exit();
 }
 
-if (isset($_GET["delete_id"])) {
-    $id = $_GET["delete_id"];
-    $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = ?");
-    $stmt->execute([$id]);
+// 2. PROCESAR ELIMINAR
+if (isset($_GET["delete_email"])) {
+    $email_delete = $_GET["delete_email"];
+    $stmt = $pdo->prepare("DELETE FROM usuario WHERE email = ?");
+    $stmt->execute([$email_delete]);
     header("Location: index.php?action=crud");
     exit();
 }
 
-$stmt = $pdo->query("SELECT * FROM usuarios ORDER BY id DESC");
+// 3. CONSULTAR REGISTROS (CORREGIDO: Se elimina ORDER BY id)
+$stmt = $pdo->query("SELECT * FROM usuario");
 $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -56,7 +69,6 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>CRUD Usuarios - ÁCIDO COLOMBIA</title>
     <link rel="stylesheet" href="/TAREA/BACKPHP/public/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body class="dashboard-body crud-body">
 
@@ -70,7 +82,7 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <hr class="sidebar-divider">
 
-            <a href="index.php" class="nav-item">
+            <a href="index.php?action=dashboard" class="nav-item">
                 <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
@@ -103,10 +115,10 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </button>
 
                 <div class="sidebar-submenu">
-                    <a href="/TAREA/BACKPHP/index.php?action=login">
+                    <a href="index.php?action=login">
                         <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
                     </a>
-                    <a href="/TAREA/BACKPHP/view/register.php">
+                    <a href="index.php?action=register">
                         <i class="fa-solid fa-user-plus"></i> Registro
                     </a>
                     <a href="index.php?action=crud" class="active">
@@ -150,7 +162,7 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                     <div class="divider-vertical"></div>
                     <div class="user-info">
-                        <span><?php echo htmlspecialchars($_SESSION["user"]["username"] ?? 'Usuario Demo'); ?></span>
+                        <span><?php echo htmlspecialchars($_SESSION["user"]["nombre"] ?? $_SESSION["user"]["email"] ?? 'Usuario Demo'); ?></span>
                         <div class="avatar"></div>
                     </div>
                 </div>
@@ -171,23 +183,23 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="crud-form-body">
                             <form action="index.php?action=crud" method="POST">
                                 <input type="hidden" name="crud_action" value="save">
-                                <input type="hidden" name="id" id="form-id">
+                                <input type="hidden" name="original_email" id="form-original-email">
                                 
                                 <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 15px; align-items: center;">
                                     <div>
-                                        <label style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Usuario</label>
-                                        <input type="text" class="crud-input" name="username" id="form-username" placeholder="Ingrese el username" required>
+                                        <label style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Correo Electrónico</label>
+                                        <input type="email" class="crud-input" name="email" id="form-email" placeholder="ejemplo@correo.com" required>
                                     </div>
                                     <div>
                                         <label style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Contraseña</label>
-                                        <input type="text" class="crud-input" name="password" id="form-password" placeholder="Ingrese la contraseña">
+                                        <input type="password" class="crud-input" name="password" id="form-password" placeholder="Ingrese la contraseña">
                                     </div>
                                     <div style="padding-top: 18px; display: flex; gap: 8px;">
                                         <button type="submit" class="btn-crud-save" id="btn-submit-text">Guardar</button>
-                                        <button type="button" class="btn-crud-cancel" id="btn-cancelar" onclick="limpiarFormulario()">Cancelar</button>
+                                        <button type="button" class="btn-crud-cancel" id="btn-cancelar" onclick="limpiarFormulario()" style="display: none;">Cancelar</button>
                                     </div>
                                 </div>
-                                <small style="color: #a0aec0; display: block; margin-top: 12px; font-size: 11px;">* Al editar, si dejas la contraseña en blanco, se mantendrá la anterior guardada en el sistema.</small>
+                                <small style="color: #a0aec0; display: block; margin-top: 12px; font-size: 11px;">* Al editar, si dejas la contraseña en blanco, se mantendrá la contraseña cifrada actual.</small>
                             </form>
                         </div>
                     </div>
@@ -201,9 +213,9 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <table class="crud-table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Password (Prueba)</th>
+                                        <th>Correo (Email)</th>
+                                        <th>Nombre</th>
+                                        <th>Password (Hash)</th>
                                         <th style="text-align: right;">Acciones</th>
                                     </tr>
                                 </thead>
@@ -211,12 +223,12 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?php if (!empty($registros)): ?>
                                         <?php foreach ($registros as $row): ?>
                                             <tr>
-                                                <td style="font-weight: 600; color: #718096;">#<?php echo $row['id']; ?></td>
-                                                <td><strong style="color: #1a202c;"><?php echo htmlspecialchars($row['username']); ?></strong></td>
-                                                <td><code style="background: #edf2f7; padding: 4px 8px; border-radius: 4px; color: #4a5568; word-break: break-all; max-width: 250px; display: inline-block;"><?php echo htmlspecialchars($row['password']); ?></code></td>
+                                                <td><strong style="color: #1a202c;"><?php echo htmlspecialchars($row['email']); ?></strong></td>
+                                                <td style="color: #4a5568;"><?php echo htmlspecialchars($row['nombre'] ?? ''); ?></td>
+                                                <td><code style="background: #edf2f7; padding: 4px 8px; border-radius: 4px; color: #4a5568; word-break: break-all; max-width: 200px; display: inline-block;"><?php echo htmlspecialchars(substr($row['password'], 0, 20) . '...'); ?></code></td>
                                                 <td style="text-align: right;">
-                                                    <button type="button" class="btn-action-edit" onclick="editarRegistro(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['username'], ENT_QUOTES); ?>')"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                                                    <a href="index.php?action=crud&delete_id=<?php echo $row['id']; ?>" class="btn-action-delete" onclick="return confirm('¿Estás seguro de eliminar este usuario?');"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                                                    <button type="button" class="btn-action-edit" onclick="editarRegistro('<?php echo htmlspecialchars($row['email'], ENT_QUOTES); ?>')"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                                                    <a href="index.php?action=crud&delete_email=<?php echo urlencode($row['email']); ?>" class="btn-action-delete" onclick="return confirm('¿Estás seguro de eliminar este usuario?');"><i class="fa-solid fa-trash"></i> Eliminar</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -242,11 +254,11 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
             dropdown.classList.toggle('open');
         }
 
-        function editarRegistro(id, username) {
+        function editarRegistro(email) {
             document.getElementById('form-title-text').innerText = "MODIFICAR USUARIO";
-            document.getElementById('form-card-title').innerText = "Editando el Registro #" + id;
-            document.getElementById('form-id').value = id;
-            document.getElementById('form-username').value = username;
+            document.getElementById('form-card-title').innerText = "Editando a " + email;
+            document.getElementById('form-original-email').value = email;
+            document.getElementById('form-email').value = email;
             document.getElementById('form-password').value = '';
             document.getElementById('form-password').placeholder = "Nueva contraseña (opcional)";
             document.getElementById('btn-submit-text').innerText = "Actualizar Cambios";
@@ -257,8 +269,8 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
         function limpiarFormulario() {
             document.getElementById('form-title-text').innerText = "GESTIÓN DE USUARIOS";
             document.getElementById('form-card-title').innerText = "Formulario de Registro de Usuario";
-            document.getElementById('form-id').value = '';
-            document.getElementById('form-username').value = '';
+            document.getElementById('form-original-email').value = '';
+            document.getElementById('form-email').value = '';
             document.getElementById('form-password').value = '';
             document.getElementById('form-password').placeholder = "Ingrese la contraseña";
             document.getElementById('btn-submit-text').innerText = "Guardar";

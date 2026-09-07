@@ -41,7 +41,7 @@
                     <input type="hidden" name="action" value="login">
 
                     <div class="input-group">
-                        <input type="text" name="username" placeholder="Nombre de usuario" required>
+                        <input type="email" name="email" placeholder="Correo electronico" required>
                     </div>
 
                     <div class="input-group">
@@ -64,7 +64,7 @@
                 </div>
 
                 <p class="signup-text">
-                    ¿No tienes una cuenta? <a href="/TAREA/BACKPHP/view/register.php">Regístrate</a>
+                    ¿No tienes una cuenta? <a href="/TAREA/BACKPHP/index.php?action=register">Regístrate</a>
                 </p>
             </div>
         </div>

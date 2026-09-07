@@ -1,6 +1,3 @@
-/* ===================================================
-   RESET Y CONFIGURACIÓN GLOBAL
-=================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -323,10 +320,37 @@ body {
 /* ===================================================
    ESTILOS PARA EL DASHBOARD (SB ADMIN STYLE)
 =================================================== */
-.dashboard-body {
-    background: linear-gradient(180deg, #ffffff 80%, #a6a6a6 100%);
-    margin: 0;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    overflow-x: hidden;
+}
+
+/* RESET EXCLUSIVO PARA EL DASHBOARD */
+body.dashboard-body {
+    background: #f8f9fc !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important; /* Desactiva el flex centrado del login */
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+}
+
+/* CONTENEDOR COMPLETO */
+body.dashboard-body .dashboard-container {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
 }
 
 
@@ -728,10 +752,15 @@ body {
 =================================================== */
 
 /* El Dashboard principal se mantiene con su diseño original intacto */
+/* CAMBIA ESTO EN TU STYLES.CSS */
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    border-radius: 25px;
+    width: 100vw;       /* Asegura el ancho completo de la pantalla */
+    max-width: 100%;    /* Evita scroll horizontal indeseado */
+    border-radius: 0;   /* QUITA EL 25px QUE CORTABA LAS ESQUINAS */
+    margin: 0;
+    padding: 0;
 }
 
 /* El CRUD se expande al 100% de la pantalla sin afectar al dashboard principal */

@@ -50,7 +50,7 @@
                     <input type="hidden" name="action" value="register">
 
                     <div class="input-group">
-                        <input type="text" name="username" placeholder="Nombre de usuario" required>
+                        <input type="email" name="email" placeholder="Correo electronico" required>
                     </div>
 
                     <div class="input-group">
