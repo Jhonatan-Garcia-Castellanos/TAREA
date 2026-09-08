@@ -1,3 +1,14 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Validar que el usuario haya iniciado sesión
+if (!isset($_SESSION["user"])) {
+    header("Location: /TAREA/BACKPHP/index.php?action=login");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -108,9 +119,26 @@
                         <span class="badge yellow">7</span>
                     </div>
                     <div class="divider-vertical"></div>
-                    <div class="user-info">
-                        <span>Usuario Demo</span>
-                        <div class="avatar"></div>
+                    
+                    <!-- Menú Desplegable con Usuario de Sesión BD -->
+                    <div class="user-info-dropdown" style="position: relative;">
+                        <div class="user-info" id="userMenuBtn" style="cursor: pointer;">
+                            <span><?php echo htmlspecialchars($_SESSION["user"]["nombre"] ?? $_SESSION["user"]["email"] ?? 'Usuario Demo'); ?></span>
+                            <div class="avatar"></div>
+                        </div>
+
+                        <div class="dropdown-menu-user" id="userDropdownMenu">
+                            <a href="index.php?action=profile" class="dropdown-user-item">
+                                <i class="fa-solid fa-user"></i> Ver Perfil
+                            </a>
+                            <a href="index.php?action=config" class="dropdown-user-item">
+                                <i class="fa-solid fa-gear"></i> Configuración
+                            </a>
+                            <div class="dropdown-user-divider"></div>
+                            <a href="index.php?action=logout" class="dropdown-user-item text-danger">
+                                <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -208,6 +236,23 @@
         function toggleSubmenu(button) {
             const dropdown = button.parentElement;
             dropdown.classList.toggle('open');
+        }
+
+        // --- LÓGICA DEL MENÚ DESPLEGABLE DE USUARIO ---
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+
+        if (userMenuBtn && userDropdownMenu) {
+            userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdownMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!userDropdownMenu.contains(e.target) && !userMenuBtn.contains(e.target)) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            });
         }
 
         // 1. Gráfica de Líneas (Ganancias)

@@ -930,3 +930,66 @@ body.dashboard-body.crud-body .dashboard-container {
 }
 
 .btn-action-delete:hover { background-color: #c53030; }
+
+/* ==========================================
+   MENÚ DESPLEGABLE DE USUARIO (TOPBAR)
+   ========================================== */
+.user-info-dropdown {
+    position: relative;
+}
+
+.dropdown-menu-user {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 12px;
+    background-color: #ffffff;
+    min-width: 190px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
+    border: 1px solid #e2e8f0;
+    padding: 6px 0;
+}
+
+/* Mostrar menú al hacer clic */
+.dropdown-menu-user.show {
+    display: block !important;
+}
+
+/* Enlaces del menú */
+.dropdown-user-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-user-item:hover {
+    background-color: #f7fafc;
+    color: #2b6cb0;
+}
+
+/* Opción de cerrar sesión */
+.dropdown-user-item.text-danger {
+    color: #e53e3e;
+}
+
+.dropdown-user-item.text-danger:hover {
+    background-color: #fff5f5;
+    color: #c53030;
+}
+
+/* Línea divisoria */
+.dropdown-user-divider {
+    height: 1px;
+    background-color: #edf2f7;
+    margin: 6px 0;
+}

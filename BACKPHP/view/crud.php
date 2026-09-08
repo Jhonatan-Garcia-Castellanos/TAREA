@@ -63,6 +63,7 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,13 +71,14 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="/TAREA/BACKPHP/public/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="dashboard-body crud-body">
 
     <div class="dashboard-container crud-container">
-        
+
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">                
+                <img src="/TAREA/BACKPHP/public/LOGO2.png" class="brand-icon" alt="Logo Ácido Colombia">
                 <span>ACIDO</span>
             </div>
 
@@ -144,7 +146,7 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </aside>
 
         <main class="main-content">
-            
+
             <header class="topbar">
                 <div class="search-bar">
                     <input type="text" placeholder="Buscar...">
@@ -161,15 +163,32 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span class="badge yellow">7</span>
                     </div>
                     <div class="divider-vertical"></div>
-                    <div class="user-info">
-                        <span><?php echo htmlspecialchars($_SESSION["user"]["nombre"] ?? $_SESSION["user"]["email"] ?? 'Usuario Demo'); ?></span>
-                        <div class="avatar"></div>
+
+                    <!-- Dropdown de Usuario -->
+                    <div class="user-info-dropdown" style="position: relative;">
+                        <div class="user-info" id="userMenuBtn" style="cursor: pointer;">
+                            <span><?php echo htmlspecialchars($_SESSION["user"]["nombre"] ?? $_SESSION["user"]["email"] ?? 'Usuario Demo'); ?></span>
+                            <div class="avatar"></div>
+                        </div>
+
+                        <div class="dropdown-menu-user" id="userDropdownMenu">
+                            <a href="index.php?action=profile" class="dropdown-user-item">
+                                <i class="fa-solid fa-user"></i> Ver Perfil
+                            </a>
+                            <a href="index.php?action=config" class="dropdown-user-item">
+                                <i class="fa-solid fa-gear"></i> Configuración
+                            </a>
+                            <div class="dropdown-user-divider"></div>
+                            <a href="index.php?action=logout" class="dropdown-user-item text-danger">
+                                <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                            </a>
+                        </div>
                     </div>
                 </div>
             </header>
 
             <div class="content-padding-crud">
-                
+
                 <div class="page-header">
                     <h2 id="form-title-text">GESTIÓN DE USUARIOS</h2>
                 </div>
@@ -184,22 +203,32 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <form action="index.php?action=crud" method="POST">
                                 <input type="hidden" name="crud_action" value="save">
                                 <input type="hidden" name="original_email" id="form-original-email">
-                                
-                                <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 15px; align-items: center;">
+
+                                <div
+                                    style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 15px; align-items: center;">
                                     <div>
-                                        <label style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Correo Electrónico</label>
-                                        <input type="email" class="crud-input" name="email" id="form-email" placeholder="ejemplo@correo.com" required>
+                                        <label
+                                            style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Correo
+                                            Electrónico</label>
+                                        <input type="email" class="crud-input" name="email" id="form-email"
+                                            placeholder="ejemplo@correo.com" required>
                                     </div>
                                     <div>
-                                        <label style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Contraseña</label>
-                                        <input type="password" class="crud-input" name="password" id="form-password" placeholder="Ingrese la contraseña">
+                                        <label
+                                            style="display: block; font-size: 11px; font-weight: 700; color: #4a5568; margin-bottom: 6px; text-transform: uppercase;">Contraseña</label>
+                                        <input type="password" class="crud-input" name="password" id="form-password"
+                                            placeholder="Ingrese la contraseña">
                                     </div>
                                     <div style="padding-top: 18px; display: flex; gap: 8px;">
-                                        <button type="submit" class="btn-crud-save" id="btn-submit-text">Guardar</button>
-                                        <button type="button" class="btn-crud-cancel" id="btn-cancelar" onclick="limpiarFormulario()" style="display: none;">Cancelar</button>
+                                        <button type="submit" class="btn-crud-save"
+                                            id="btn-submit-text">Guardar</button>
+                                        <button type="button" class="btn-crud-cancel" id="btn-cancelar"
+                                            onclick="limpiarFormulario()" style="display: none;">Cancelar</button>
                                     </div>
                                 </div>
-                                <small style="color: #a0aec0; display: block; margin-top: 12px; font-size: 11px;">* Al editar, si dejas la contraseña en blanco, se mantendrá la contraseña cifrada actual.</small>
+                                <small style="color: #a0aec0; display: block; margin-top: 12px; font-size: 11px;">* Al
+                                    editar, si dejas la contraseña en blanco, se mantendrá la contraseña cifrada
+                                    actual.</small>
                             </form>
                         </div>
                     </div>
@@ -213,28 +242,40 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <table class="crud-table">
                                 <thead>
                                     <tr>
-                                        <th>Correo (Email)</th>
-                                        <th>Nombre</th>
-                                        <th>Password (Hash)</th>
-                                        <th style="text-align: right;">Acciones</th>
+                                        <th><b>Correo</b></th>
+                                        <th><b>Nombre</b></th>
+                                        <th><b>Password (Hash)</b></th>
+                                        <th style="text-align: right;"><b>Acciones</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($registros)): ?>
                                         <?php foreach ($registros as $row): ?>
                                             <tr>
-                                                <td><strong style="color: #1a202c;"><?php echo htmlspecialchars($row['email']); ?></strong></td>
-                                                <td style="color: #4a5568;"><?php echo htmlspecialchars($row['nombre'] ?? ''); ?></td>
-                                                <td><code style="background: #edf2f7; padding: 4px 8px; border-radius: 4px; color: #4a5568; word-break: break-all; max-width: 200px; display: inline-block;"><?php echo htmlspecialchars(substr($row['password'], 0, 20) . '...'); ?></code></td>
+                                                <td><strong
+                                                        style="color: #1a202c;"><?php echo htmlspecialchars($row['email']); ?></strong>
+                                                </td>
+                                                <td style="color: #4a5568;">
+                                                    <?php echo htmlspecialchars($row['nombre'] ?? ''); ?></td>
+                                                <td><code
+                                                        style="background: #edf2f7; padding: 4px 8px; border-radius: 4px; color: #4a5568; word-break: break-all; max-width: 200px; display: inline-block;"><?php echo htmlspecialchars(substr($row['password'], 0, 20) . '...'); ?></code>
+                                                </td>
                                                 <td style="text-align: right;">
-                                                    <button type="button" class="btn-action-edit" onclick="editarRegistro('<?php echo htmlspecialchars($row['email'], ENT_QUOTES); ?>')"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
-                                                    <a href="index.php?action=crud&delete_email=<?php echo urlencode($row['email']); ?>" class="btn-action-delete" onclick="return confirm('¿Estás seguro de eliminar este usuario?');"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                                                    <button type="button" class="btn-action-edit"
+                                                        onclick="editarRegistro('<?php echo htmlspecialchars($row['email'], ENT_QUOTES); ?>')"><i
+                                                            class="fa-solid fa-pen-to-square"></i> Editar</button>
+                                                    <a href="index.php?action=crud&delete_email=<?php echo urlencode($row['email']); ?>"
+                                                        class="btn-action-delete"
+                                                        onclick="return confirm('¿Estás seguro de eliminar este usuario?');"><i
+                                                            class="fa-solid fa-trash"></i> Eliminar</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="4" style="text-align: center; color: #a0aec0; padding: 40px; font-style: italic;">No hay usuarios registrados actualmente.</td>
+                                            <td colspan="4"
+                                                style="text-align: center; color: #a0aec0; padding: 40px; font-style: italic;">
+                                                No hay usuarios registrados actualmente.</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
@@ -263,7 +304,7 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById('form-password').placeholder = "Nueva contraseña (opcional)";
             document.getElementById('btn-submit-text').innerText = "Actualizar Cambios";
             document.getElementById('btn-cancelar').style.display = 'inline-block';
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function limpiarFormulario() {
@@ -276,6 +317,57 @@ $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
             document.getElementById('btn-submit-text').innerText = "Guardar";
             document.getElementById('btn-cancelar').style.display = 'none';
         }
+
+        // Función para abrir/cerrar submenús del sidebar
+        function toggleSubmenu(button) {
+            const dropdown = button.parentElement;
+            dropdown.classList.toggle('open');
+        }
+
+        // Función para editar un registro en el CRUD
+        function editarRegistro(email) {
+            document.getElementById('form-title-text').innerText = "MODIFICAR USUARIO";
+            document.getElementById('form-card-title').innerText = "Editando a " + email;
+            document.getElementById('form-original-email').value = email;
+            document.getElementById('form-email').value = email;
+            document.getElementById('form-password').value = '';
+            document.getElementById('form-password').placeholder = "Nueva contraseña (opcional)";
+            document.getElementById('btn-submit-text').innerText = "Actualizar Cambios";
+            document.getElementById('btn-cancelar').style.display = 'inline-block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Función para limpiar el formulario del CRUD
+        function limpiarFormulario() {
+            document.getElementById('form-title-text').innerText = "GESTIÓN DE USUARIOS";
+            document.getElementById('form-card-title').innerText = "Formulario de Registro de Usuario";
+            document.getElementById('form-original-email').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-password').value = '';
+            document.getElementById('form-password').placeholder = "Ingrese la contraseña";
+            document.getElementById('btn-submit-text').innerText = "Guardar";
+            document.getElementById('btn-cancelar').style.display = 'none';
+        }
+
+        // --- MENÚ DESPLEGABLE DE USUARIO (TOPBAR) ---
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+
+        if (userMenuBtn && userDropdownMenu) {
+            // Abrir o cerrar al hacer clic en el nombre/avatar
+            userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdownMenu.classList.toggle('show');
+            });
+
+            // Cerrar el menú si se hace clic en cualquier otro lado de la pantalla
+            document.addEventListener('click', (e) => {
+                if (!userDropdownMenu.contains(e.target) && !userMenuBtn.contains(e.target)) {
+                    userDropdownMenu.classList.remove('show');
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
