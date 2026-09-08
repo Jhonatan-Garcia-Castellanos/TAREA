@@ -494,7 +494,7 @@ CREATE TRIGGER trg_auditar_cambio_rol BEFORE UPDATE ON usuario FOR EACH ROW BEGI
     END IF;
 END$$
 
-CREATE TRIGGER trg_limpiar_sesiones AFTER UPDATE ON control_accesos FOR EACH ROW BEGIN
+CREATE TRIGGER trg_limpiar_sesiones BEFORE UPDATE ON control_accesos FOR EACH ROW BEGIN
     IF NEW.Intentos_Fallidos = 0 THEN
         SET NEW.Bloqueado_Hasta = NULL;
     END IF;
